@@ -25,13 +25,6 @@ const authorPosts = await getPostsByAuthor(author.id)
     description={author.data.bio || `Profile of ${author.data.name}.`}
     noindex
   />
-  <Breadcrumbs
-    items={[
-      { href: '/authors', label: 'Authors', icon: 'lucide:users' },
-      { label: author.data.name, icon: 'lucide:user' },
-    ]}
-  />
-
   <section>
     <AuthorCard author={author} />
   </section>

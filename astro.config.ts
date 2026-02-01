@@ -21,7 +21,19 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
-  integrations: [mdx(), react(), sitemap(), icon()],
+  integrations: [
+  mdx(), 
+  react(), 
+  sitemap(), 
+  icon({
+    include: {
+      logos: ['*'],
+      lucide: ['*'],
+      devicon: ['*'],
+      'simple-icons': ['*']
+    }
+  })
+],
   vite: {
     plugins: [tailwindcss()],
   },

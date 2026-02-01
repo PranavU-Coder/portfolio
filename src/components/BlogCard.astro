@@ -60,7 +60,7 @@ const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
                 <div class="flex items-center gap-x-1.5">
                   <AvatarComponent
                     client:load
-                    src={author.avatar}
+                    src={typeof author.avatar === 'string' ? author.avatar : author.avatar.src}
                     alt={author.name}
                     fallback={author.name[0]}
                     className="size-5 rounded-full"

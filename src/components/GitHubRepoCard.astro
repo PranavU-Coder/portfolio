@@ -1,0 +1,57 @@
+---
+import type { GitHubRepo } from '@/lib/github-api'
+import Link from '@/components/Link.astro'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  repo: GitHubRepo
+}
+
+const { repo } = Astro.props
+---
+
+<article class="flex flex-col gap-2 rounded-lg border p-4 transition-colors hover:bg-muted/50">
+  <div class="flex items-start justify-between gap-2">
+    <Link
+      href={repo.html_url}
+      external
+      class="text-lg font-medium hover:underline"
+    >
+      {repo.name}
+    </Link>
+    <div class="flex items-center gap-3 text-sm text-muted-foreground">
+      {repo.stargazers_count > 0 && (
+        <span class="flex items-center gap-1">
+          <Icon name="lucide:star" class="size-4" />
+          {repo.stargazers_count}
+        </span>
+      )}
+      {repo.forks_count > 0 && (
+        <span class="flex items-center gap-1">
+          <Icon name="lucide:git-fork" class="size-4" />
+          {repo.forks_count}
+        </span>
+      )}
+    </div>
+  </div>
+
+  {repo.description && (
+    <p class="text-sm text-muted-foreground line-clamp-2">
+      {repo.description}
+    </p>
+  )}
+
+  <div class="flex flex-wrap items-center gap-2 mt-auto">
+    {repo.language && (
+      <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs">
+        <Icon name="lucide:code" class="size-3" />
+        {repo.language}
+      </span>
+    )}
+    {repo.topics.slice(0, 3).map((topic) => (
+      <span class="inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs">
+        #{topic}
+      </span>
+    ))}
+  </div>
+</article>

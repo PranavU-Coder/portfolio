@@ -3,44 +3,122 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
+import GitHubRepoCard from '@/components/GitHubRepoCard.astro'
+import GitHubStats from '@/components/GitHubStats.astro'
+import GitHubContributionCalendar from '@/components/GitHubContributionCalendar.astro'
+import { buttonVariants } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
+import { getGitHubRepos } from '@/lib/github-api'
+import { getGitHubStats, getContributionCalendar } from '@/lib/github-stats-api'
+import { getCachedData } from '@/lib/github-cache'
+import SkillList from '@/components/SkillList.astro'
+
+const username = 'PranavU-Coder' 
 
 const projects = await getAllProjects()
+
+const excludedRepos = [
+  'DBMS_Labs',
+  'DAA_Labs',
+  'bitsatards_bot',   
+  'mellon',
+  'portfolio',        
+]
+
+// Use cached data for GitHub API calls otherwise data-fetching each time gets too expensive and can cause switching over/loading over to this page to be a bad ux. 
+
+const githubRepos = await getCachedData(
+  `repos-${username}`, 
+  () => getGitHubRepos(username, excludedRepos)
+)
+
+const githubStats = await getCachedData(`stats-${username}`, () => getGitHubStats(username))
+const contributionCalendar = await getCachedData(`calendar-${username}`, () => getContributionCalendar(username))
+const previewRepos = githubRepos.slice(0, 4)
+
+const languages = [
+  { name: 'Python', icon: 'logos:python' },
+  { name: 'Typescript', icon: 'logos:typescript-icon' },
+  { name: 'GDScript', icon: 'devicon:godot' },
+  { name: 'C', icon: 'logos:c' },
+  { name: 'C++', icon: 'logos:c-plusplus' },
+  { name: 'Java', icon: 'logos:java' },
+]
+
+const frameworks = [
+  { name: 'Numpy', icon: 'devicon:numpy' },  
+  { name: 'Matplotlib', icon: 'devicon:matplotlib' },  
+  { name: 'OpenCV', icon: 'logos:opencv' },
+  { name: 'Pytest', icon: 'devicon:pytest' },
+  { name: 'Streamlit', icon: 'logos:streamlit' },
+  { name: 'Scikit-Learn', icon: 'devicon:scikitlearn' }, 
+  { name: 'Tensorflow', icon: 'logos:tensorflow' },
+  { name: 'Pytorch', icon: 'logos:pytorch-icon' },
+  { name: 'LangChain', icon: 'simple-icons:langchain' },
+  { name: 'Astro', icon: 'logos:astro-icon' },
+]
 ---
 
 <Layout class="max-w-3xl">
   <PageHead slot="head" title="About" />
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
-
-  <section>
+  
+  <section class="space-y-12">
     <div class="min-w-full">
       <div class="prose mb-8">
-        <p class="mt-0">
-          astro-erudite is an opinionated, unstyled static blogging template
-          that prioritizes simplicity and performance, built with <Link
-            href="https://astro.build"
-            external
-            underline>Astro</Link
-          >, <Link href="https://tailwindcss.com" external underline
-            >Tailwind</Link
-          >, and <Link href="https://ui.shadcn.com" external underline
-            >shadcn/ui</Link
-          >. It provides a clean foundation for your content while being
-          extremely easy to customize.
+        <p class="mt-0 text-lg">
+          Hi I am Pranav! I am a hobbyist programmer and ML enthusiast. 
         </p>
         <p>
-          To learn more about the philosophy behind this template, check out the
-          following blog post: <Link
-            href="/blog/the-state-of-static-blogs"
-            underline>The State of Static Blogs in 2024</Link
-          >.
+         I love making OSS and make it a point to upload most of my work on GitHub. If you want to work on any cool project, feel free to 
+          <a href="mailto:pranavu8406@gmail.com" class="underline underline-offset-4 hover:text-primary transition-colors font-medium">
+            email me
+          </a>
         </p>
       </div>
 
-      <h2 class="mb-4 text-2xl font-medium">Example Projects Listing</h2>
-      <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mb-12">
+        <SkillList title="Languages" list={languages} />
+        <SkillList title="Frameworks" list={frameworks} />
+      </div>
+
+      <h2 class="mb-4 text-2xl font-medium">Spotlight Projects</h2>
+      <div class="flex flex-col gap-4 mb-12">
         {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+
+    {githubStats && (
+      <div class="space-y-6">
+        <h2 class="text-2xl font-medium">GitHub Activity</h2>
+        <GitHubStats stats={githubStats} />
+        {contributionCalendar && (
+          <GitHubContributionCalendar 
+            calendar={contributionCalendar} 
+            username={username}
+          />
+        )}
+      </div>
+    )}
+
+    <div class="min-w-full pb-12">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-medium">More Projects</h2>
+        <Link
+          href={`https://github.com/${username}?tab=repositories`}
+          external
+          class={buttonVariants({ variant: 'ghost', size: 'sm' }) + ' group'}
+        >
+          View all projects
+          <span class="ml-1.5 transition-transform group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </Link>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {previewRepos.map((repo) => <GitHubRepoCard repo={repo} />)}
       </div>
     </div>
   </section>

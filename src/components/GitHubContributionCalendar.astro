@@ -1,0 +1,69 @@
+---
+import type { ContributionCalendar } from '@/lib/github-stats-api'
+
+interface Props {
+  calendar: ContributionCalendar
+  username: string
+}
+
+const { calendar, username } = Astro.props
+
+const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const currentMonth = new Date().getMonth()
+const months = []
+for (let i = 0; i < 12; i++) {
+  months.push(monthLabels[(currentMonth - 11 + i + 12) % 12])
+}
+---
+
+<div class="space-y-4">
+  <div class="flex justify-between text-xs text-muted-foreground px-8">
+    {months.map((month, i) => (
+      i % 2 === 0 ? <span>{month}</span> : <span class="invisible">{month}</span>
+    ))}
+  </div>
+
+  <div class="flex gap-1 overflow-x-auto pb-2">
+    {calendar.weeks.map((week) => (
+      <div class="flex flex-col gap-1">
+        {week.contributionDays.map((day) => (
+          <div
+            class="size-3 rounded-sm transition-all hover:ring-2 hover:ring-offset-1 hover:ring-foreground/20"
+            class:list={[
+              day.level === 0 && 'bg-muted',
+              day.level === 1 && 'bg-emerald-200 dark:bg-emerald-900/40',
+              day.level === 2 && 'bg-emerald-400 dark:bg-emerald-700/60',
+              day.level === 3 && 'bg-emerald-600 dark:bg-emerald-500/80',
+              day.level === 4 && 'bg-emerald-800 dark:bg-emerald-400',
+            ]}
+            title={`${day.count} contributions on ${new Date(day.date).toLocaleDateString()}`}
+          />
+        ))}
+      </div>
+    ))}
+  </div>
+
+  <div class="flex items-center justify-between text-xs text-muted-foreground">
+    <span>{calendar.totalContributions} contributions in the last year</span>
+    <a 
+      href={`https://github.com/${username}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-foreground transition-colors"
+    >
+      GitHub activity • PranavU
+    </a>
+  </div>
+
+  <div class="flex items-center gap-2 text-xs">
+    <span class="text-muted-foreground">Less</span>
+    <div class="flex gap-1">
+      <div class="size-3 rounded-sm bg-muted" />
+      <div class="size-3 rounded-sm bg-emerald-200 dark:bg-emerald-900/40" />
+      <div class="size-3 rounded-sm bg-emerald-400 dark:bg-emerald-700/60" />
+      <div class="size-3 rounded-sm bg-emerald-600 dark:bg-emerald-500/80" />
+      <div class="size-3 rounded-sm bg-emerald-800 dark:bg-emerald-400" />
+    </div>
+    <span class="text-muted-foreground">More</span>
+  </div>
+</div>
