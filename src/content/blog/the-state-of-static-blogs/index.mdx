@@ -1,246 +1,93 @@
 ---
-title: 'The State of Static Blogs in 2024'
-description: 'There should not be a single reason why you would need a command palette search bar to find a blog post on your own site.'
-date: 2024-07-25
-tags: ['v1.0.0']
+title: 'OverSaturation'
+description: 'Frustration with the Indian dev-scene.'
+date: 2025-10-24
+tags: ['v1.2.0']
 image: './banner.png'
-authors: ['enscribe']
+authors: ['PranavU']
 ---
 
-## Introduction
+## Idea (Motivation)
 
-Hello! My name is enscribe ([jktrn](https://github.com/jktrn) on GitHub), and I'm a fullstack web developer who has been fiddling with blogging platforms for a couple of years now. I run a blog at [enscribe.dev](https://enscribe.dev), where I write about cybersecurity and the capture-the-flag (CTF) scene.
+So the thought of me writing this post stems from the time I first read [Namish's Perspective](https://namishh.com/blog/talks/development) on this matter and well also personal experiences with peers I interact with so I wanted to tackle some topics on it and talk about the insane saturation of the CS field in India.
 
-I have a lot of opinions about what makes a great blogging template. As a cumulative result of all the slop, bullshit, and outright terrible design decisions I've had to deal with working with various templates and frameworks, I bring you [astro-erudite](https://github.com/jktrn/astro-erudite), which should hopefully bring a better developer and user experience in terms of ease of use, customization, and performance.
+## Coding - the new JEE?
 
-astro-erudite is written in Astro, a framework hyperoptimized for static content such as blogs. Aesthetically, it is also designed to be as boring as possible while still maintaining maximum functionality, as to allow for the freedom of the developer (or the designer they hire) to make their blog uniquely their own. Within the codebase of this template I've included many nuances that, in my opinion (and there will be many, many opinions here), make the developer experience significantly more pleasant. I've also _excluded_ many features that, frankly, you don't need.
+If I am being 100% honest, I can't lie the way software engineering is being treated like in India, it is lowkey the new JEE
 
-## Welcoming some DX features
+My personal favorites being: 
 
-This is a non-exhaustive list of features I believe are essential for a frictionless developer experience:
+> Bhaiya yeh **DSA** karu ya **Python**?
 
-- [shadcn/ui](https://ui.shadcn.com) is a pretty controversial component library. I love it. I don't care much for the components themselves as they are literally [Radix](https://www.radix-ui.com/) primitive wrappers&mdash;however, the best part is arguably its take on [theming](https://ui.shadcn.com/docs/theming), which introduces a convention involving CSS colors such as `background` and `foreground` into your Tailwind configuration so that styling is a breeze. These classes also automatically adapt to the user's selected theme, and as such you don't need to worry about adding an equivalent `dark:` style to all of your theming. shadcn/ui turns `"bg-stone-50 text-stone-900 dark:bg-stone-900 dark:text-stone-50"` into `"bg-background text-foreground"`, both more semantic and easier to blanket edit (if you wanted to change all your blues in your site to indigos, you would need to go around every single class and change it rather than editing a single CSS variable). Other utility colors such as `secondary`, `muted`, `accent`, and `destructive` also exist and are very self-explanatory in name (and also have an equivalent `-foreground` class, e.g. `secondary-foreground`, which you can apply to text on top of these colors).
-- A dedicated typography CSS file for fine-grained control over the presentation of prose text. Although [Tailwind Typography](https://github.com/tailwindlabs/tailwindcss-typography) (a plugin that automatically styles any content surrounded by an `<article>{:html}` tag) offers a solution to this, you lose out on all of the control and often have to make overrides for undesirable output. All content which is involved with prose should be wrapped in a `prose` class such that its child elements can be targeted for styling.
-- [Expressive Code](https://expressive-code.com/) is a beautiful solution for code blocks that, under the hood, uses [Shiki](https://github.com/shikijs/shiki) for syntax highlighting. Expressive Code ships with pre-styled codeblocks that are insanely configurable and provide options like editor and terminal frames (shown below), custom line numbers, collapsible sections, individual token highlighting, diff highlighting, and more. To use these for any provided codeblock, simply add any of the following props after the codeblock's backticks:
+> Is ML Data Science **worth** it?
 
-  ````mdx showLineNumbers=false collapse={2-42}
-  ```ts title="example.ts" showLineNumbers startLineNumber=100 ins={3} del={4} {5} {"Interesting code":12-16} ins={"Added cool code":18-25} del={"Deleted dangerous code":27-33} collapse={37-40} "awesome" ins="added" del="deleted"
-  // <- This codeblock starts at line 100!
+> Bhai mai toh socch raha yeh **roadmap** karunga aur fir 1 cr package
 
-  // This line should be marked as a diff addition
-  // This line should be marked as a diff deletion
-  // This line should be highlighted
+Honestly though, I don't necessarily blame their attitude as it should be considered that for most part Indian families see CSE as a way of getting out of poverty, a more common trend is the emergence of people forcing upon themselves to learn coding even when they don't want to.
 
-  // The keyword "added" will be highlighted in green
-  // The keyword "deleted" will be highlighted in red
-  // The keyword "awesome" will be marked with gray
+This is accompanied by the fact that there are so many YouTube channels who focus on 'yeh karlo aur andha paisa' and the idea they sell that if you complete the XYZ roadmap you are destined to greatness, now to make it clear software is vast and there is no one roadmap that teaches it all ultimately your journey as a SWE comes down to how enthusiastic you're about **learning**.
 
-  // Insert an empty line above code you wish to add a note to
+And no, learning Java Springboot or React is not gonna directly land you a 6-figure job.
+```python
+def fundamentals():
+    print(f"Couple of CS grads don't even know what's the difference between a tuple and list!")
+```
 
-  function demonstrateFeatures() {
-    console.log('Hello world!')
-    return true
-  }
+## Roadmaps - a Scam?
 
+One of the things that killed creativity or any novel ideas is partially the existence of these CS roadmaps, now I don't think that if you are referring or planning to learn a particular language or framework in a concise or planned manner is bad at all, infact I think it is a great way of learning. However the problem comes from the fact that no matter how many tutorials you watch, guides you read or go through lines of code of a friend's project as long as you don't do it yourself in the end it kindof becomes pointless.
 
-  function obfuscateString(input) {
-    return Buffer.from(input)
-      .toString('base64')
-      .replace(/[A-Za-z]/g, (c) =>
-        String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
-      )
-  }
+This has led to so many CS grads being unable to write a single line of code despite the fact that they chose to study this subject for 4 years. Now don't get me wrong, CS degree doesn't necessarily teach you programming but rather **Computer Science** as a whole → covering computer architecture, memory management, database handling and then a high level programming language with ton of abstractions such as python or for enterprise reasons : _JAVA_
 
+Roadmaps are like training wheels, they give you an idea of what you should be doing however you can only learn how to ride a bike if you let go of those. This just leads to the standard 3-4 coding projects of MERN STACK APP to-do lists. In Indian tech scene the issue which I have been rambling on about for quite some time now in this post has been this idea of
 
-  function deleteAllFiles() {
-    fs.rmdirSync('/etc', { recursive: true })
-    fs.rmdirSync('/usr', { recursive: true })
-    fs.rmdirSync('/home', { recursive: true })
-    return 'System wiped!'
-  }
+> 10 HR 1 SHOT VIDEO OF C++ !!! AB **GSOC/FAANG** PAKKA!!!!
 
-  // These lines can be collapsed
-  interface HidingStuffHere {
-    name: string
-    age: number
-    email: string
-    phone: string
-  }
-  ```
-  ````
+The way the prospect of GSOC has been treated here, it doesn't even resemble the original intention that google had started this initiative for, the insane amount of videos that you stumble upon these influencers making of the stipend offers is just crazy. It is just baffling to me how like none of these videos actually focus on why open source contributions matter at all or why this maybe a great learning opportunity for a fellow programmer or open source enthusiast but it's just littered with this nonsense of get 1.8L stipend with this one trick.
 
-  This results in a codeblock that looks like this:
+## AI - _Bubble_
 
-  ```ts title="example.ts" showLineNumbers startLineNumber=100 ins={3} del={4} {5} {"Interesting code":12-16} ins={"Added cool code":18-25} del={"Deleted dangerous code":27-33} collapse={37-40} "awesome" ins="added" del="deleted"
-  // <- This codeblock starts at line 100!
+Now this is an issue that is worldwide and not in just this country so for sometime I want to also talk about this topic while I'm yapping about oversaturation in the field of CS
 
-  // This line should be marked as a diff addition
-  // This line should be marked as a diff deletion
-  // This line should be highlighted
+Thanks to ChatGPT, Gemini, Claude, Cursor, V0, Bolt and all such AI chatbots/code-assistants you see daily YouTube Shorts or Instagram Reels of dudes saying AI will replace SWEs 'why coding is no longer a useful skill anymore', 'AI IS COMING FOR YOUR JOB' and my god it has to be one of the most annoying things I've seen in a while.
 
-  // The keyword "added" will be highlighted in green
-  // The keyword "deleted" will be highlighted in red
-  // The keyword "awesome" will be marked with gray
+For AI to be really efficient at a level where it can replace proper SWEs it needs to be able to write production level code that needs to maintainable by other maintainers and most of the times SWEs just can't comprehend the ungodly amount of slop that ChatGPT spits out, and if you think 'eh I will improve on this with more vibe coding'.
 
-  // Insert an empty line above code you wish to add a note to
+All the power to you my guy, cause goodluck trying to debug code of an LLM which it spat out without any contextual awareness
 
-  function demonstrateFeatures() {
-    console.log('Hello world!')
-    return true
-  }
+Or even better, trying to maximize LLMs use till it reaches a particular temperature where it can longer generate responses or start hallucinating.
 
+![Vibe Coders](./assets/vibe_coders.webp)
 
-  function obfuscateString(input) {
-    return Buffer.from(input)
-      .toString('base64')
-      .replace(/[A-Za-z]/g, (c) =>
-        String.fromCharCode(c.charCodeAt(0) + (Math.random() > 0.5 ? 1 : -1)),
-      )
-  }
+The fact is that for AI to generate 'production-ready' code and be able to manage all workflows to be fully automated we unfortunately still need more SWEs to make that happen thus more demand for software jobs and for creation of more software this cycle continues, who would have even thought?? and for the day that AI is fully aware and able to self-assign and maintain large codebases and databases. Trust me buddy, your **job is the last thing you would be wanting to worry about** since we would have reached dystopia straight outta Isaac Asimov's novel
 
+## My personal Journey
 
-  function deleteAllFiles() {
-    fs.rmdirSync('/etc', { recursive: true })
-    fs.rmdirSync('/usr', { recursive: true })
-    fs.rmdirSync('/home', { recursive: true })
-    return 'System wiped!'
-  }
+Throughout this post, I've been just ranting about all the negative aspects of CS stream so ... I wanted to take a moment and talk about my own journey and why I feel the way about this field the way I do. So without further ado let me start
 
-  // These lines can be collapsed
-  interface HidingStuffHere {
-    name: string
-    age: number
-    email: string
-    phone: string
-  }
-  ```
+I started programming seriously around June of 2024 when a senior I used to talk to a lot during entrance time would tell he was starting to learn C and I was well yessir lets do it and I started reading [Beej's Guide](https://beej.us/guide/bgc/pdf/bgc_usl_c_1.pdf) and I'm glad I did cause goddamn it was an interesting approach to programming which was the fuck around and find out, an approach which I think is how a lot of software should be and is if you think deep about it.
 
-  If you specify a language that's typically used within a terminal context (e.g. `ps1`, `sh`, `console`, etc.) then the frame of the codeblock will instead look like a terminal:
+![Dunning Kruger Effect](./assets/dunning_kruger.webp)
 
-  ```console title="Installing dependencies with pnpm"
-  $ pnpm install @astrojs/mdx @astrojs/react @astrojs/sitemap astro-icon
-  ```
+I genuinely believe that breaking your code multiple times or reverse-engineering an already existing application will help you understand what happens underneath the hood of any application. That feel when you fuck up multiple times to be finally able to grasp how stuff works is a feeling of its own.
 
-- Expressive Code unfortunately does not support inline syntax highlighting like this: `console.log('Hello world!'){:js}`. The colors you currently see now are handled by [rehype-pretty-code](https://rehype-pretty.pages.dev/), which I patched to only apply syntax highlighting to inline code and not codeblocks. To read more about this process, see the next blog post: [v1.3.0: "Patches in Production"](/blog/rehype-patch).
+A lot of programmers might get discouraged when they see something they have been working on for years might have already been done at a massive scale but the thing is that this notion may not always be correct. Imagine if Linus Torvalds had the same thought for his linux kernel (Freax was the original name lol) when Microsoft had a booming Windows and an Apple DOS, we would have never had such a revolutionary open source movement ever. Today Linux helps powers 90-95% of all cloud and web servers. and again just a friendly reminder, Linus Torvalds only started this as a [HOBBY PROJECT](https://fossbytes.com/wp-content/uploads/2016/08/linus-torvald-first-linux-email.png) yea nothing much serious obviously lol.
 
-- The `cn(){:js}` function is a utility function which combines [clsx](https://www.npmjs.com/package/clsx) and [tailwind-merge](https://www.npmjs.com/package/tailwind-merge), two packages which allow painless conditional class addition and concatenation:
+And thank god for Linux, it has been my preferred OS to work with (oh, I added this segment cause I'm an Arch User and I love linux)
 
-  ```tsx title="src/lib/utils.ts" caption="A utility function for class name concatenation" showLineNumbers
-  import { type ClassValue, clsx } from 'clsx'
-  import { twMerge } from 'tailwind-merge'
+![Fastfetch](./assets/fastfetch.png)
+_I love how much customization I can get from my command line and editing config files_
 
-  export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs))
-  }
-  ```
+Another thing that struck me is the in video game dev scene, where you often see indie game devs works on games for years and years with no guarantee of success but still do it cause of their love and passion for making video games. And I 100% LOVE this mentality, Balatro was a game made by a dev who was asked by his employer to take break for sometime, and his ideal vacation? making a card game that he and his family members would enjoy. and it became a smash hit due its interesting design style and the feel that the dev gave it.
 
-  This needs to be in every single template. This is an example of it being used in my `<Link>{:html}` component:
+![Balatro](./assets/balatro.jpg)
 
-  ```astro showLineNumbers title="src/components/Link.astro" caption="A custom Link component with tailwind-merge and clsx" {10-15} "cn"
-  ---
-  import { cn } from '@/lib/utils'
+More recently Team Cherry made silk song a sequel to Hollow Knight and again with bare minimum marketing managed to surpass 5M Players in 3 days and crashed steam cause of the insane demand. beating major game titles from AAA corps. only other game whose hype is as much if not more is _GTAVI_ which has a rumored 75M$ for marketing and overall 2B for total dev cost. The immense love for their creation of software is often seen in their games so much even the pirating subreddits went against pirating silk song which is absolutely insane.
 
-  const { href, external, class: className, underline, ...rest } = Astro.props
-  ---
+## Final Thoughts
 
-  <a
-    href={href}
-    target={external ? '_blank' : '_self'}
-    class={cn(
-      'inline-block transition-colors duration-300 ease-in-out',
-      underline &&
-        'underline decoration-muted-foreground underline-offset-[3px] hover:decoration-foreground',
-      className,
-    )}
-    {...rest}
-  >
-    <slot />
-  </a>
-  ```
+So... what even was the point of all this rambling? well I'll explain it with a case of my good [friend](https://rv178.is-a.dev/) (also shoutout to my guy, follow him aswell) who is a self taught dev, no one ever told him that 'bhai yeh karle is ke baad toh job/internship pakka' he just did what he did purely cause he wanted to (and was well bored in lockdown lol) but he still has more practical software knowledge than the average **leetcode bandar**. You might see a couple of tweets online of dweebs criticizing balatro's source code and yes balatro or other indie devs might not have created O(1) card-stacking game but tell me who has a more practical grasp in game dev, these dweebs or LocalThunk?
 
-  We were able to, in a single helper function:
+For me, its not like I've never been exposed to Software Dev prior but I never got onto it till the thought came into my mind that I could practically create anything I want as long as I have an idea how to proceed with it from a creative and a technical standpoint. And that is how I believe true innovation comes from multiple failed attempts but continuing for the love of the game goddammit and that's how it should be, software can be an art if you want it to
 
-  1. Concatenate whatever the user passed via the `class{:astro}` prop to our base styles
-  2. Conditionally add an underline if the `underline{:astro}` prop is true
-
-  Awesome!
-
-## Welcoming some UX features
-
-Within the blog itself (as in the layout, appearance, and navigation) are features that I believe are essential for a great user experience:
-
-- Images are awesome and, by default, your blog post should have an image associated with it as part of the post's [Open Graph](https://ogp.me/) metadata. Since you can do whatever you want with the image, all of my dummy posts will have a placeholder image placed within their folder in `src/content/blog/`. Whenever you load into a blog post, splat in the middle will be the image associated with that post in its frontmatter.
-- Theme selectors should be self-explanatory. I've added one on the top right of the header, which is also `sticky` and not `absolute` such that it doesn't ignore the document flow (and thus you won't have to add `mt-20` to the top of every single page).
-- The table of contents of a post shouldn't be reduced to a `<details closed>{:html}` at the start of a blog post on desktop. You'd need to go to the top of the page to navigate through items. I've added a sticky `<TableOfContents>{:html}` component which always hangs out around the unused left side margin of a blog post. I also attached a very tiny client-side script using [`IntersectionObserver{:js}`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to highlight all of the headings you're viewing within the <abbr title="Table of Contents">TOC</abbr> as you scroll through the page&mdash;it also will handle nested headings in that the parent heading of a visible child will still be highlighted even if off-screen (see the dummy [2024 Post](/blog/2024-post) for an example of this). I'll still use a collapsible `<details>{:html}` element for the table of contents on mobile though since obviously a table of contents on the side is unfeasible for small screens.
-- Every page, except the homepage, will have a `<Breadcrumb>{:html}` component which shows you your current location in the site hierarchy. I don't see these often in blog templates even though they are so amazing for both discoverability (<abbr title="Search Engine Optimization">SEO</abbr> and crawling) and user experience (the user always knows how "deep" they are in the site).
-- You can specify multiple post authors via frontmatter. If this post author's ID is found within the `Authors` collection, then it will render particular info from that author's frontmatter file, `[author-name].md` (e.g. avatar, link to profile). For example, the previous post (2024 Post) has two authors: "enscribe" and "jktrn", where "enscribe" is the only author with a custom avatar since "jktrn" is unregistered.
-  - Each author will have their own page, which lists all of their posts. If you're the only author throughout the entire blog then you can simply disregard all aspects regarding both inserting authors and the `Authors` collection.
-- Each tag will also have their own page, which lists all of the posts under that tag!
-- $\LaTeX$ is fully supported with [KaTeX](https://katex.org/):
-
-  <blockquote>
-
-  To solve the cubic equation $t^3 + pt + q = 0$ (where the real numbers
-  $p, q$ satisfy ${4p^3 + 27q^2} > 0$) one can use Cardano's formula:
-
-  $$
-    \sqrt[{3}]{
-      -\frac{q}{2}
-      +\sqrt{\frac{q^2}{4} + {\frac{p^{3}}{27}}}
-    }+
-    \sqrt[{3}]{
-      -\frac{q}{2}
-      -\sqrt{\frac{q^2}{4} + {\frac{p^{3}}{27}}}
-    }
-  $$
-
-  For any $u_1, \dots, u_n \in \mathbb{C}$ and
-  $v_1, \dots, v_n \in \mathbb{C}$, the Cauchy–Bunyakovsky–Schwarz
-  inequality can be written as follows:
-
-  $$
-    \left| \sum_{k=1}^n {u_k \bar{v_k}} \right|^2
-    \leq
-    {
-      \left( \sum_{k=1}^n {|u_k|} \right)^2
-      \left( \sum_{k=1}^n {|v_k|} \right)^2
-    }
-  $$
-
-  Finally, the determinant of a Vandermonde matrix can be calculated
-  using the following expression:
-
-  $$
-    \begin{vmatrix}
-    1 & x_1 & x_1^2 & \dots & x_1^{n-1} \\
-    1 & x_2 & x_2^2 & \dots & x_2^{n-1} \\
-    1 & x_3 & x_3^2 & \dots & x_3^{n-1} \\
-    \vdots & \vdots & \vdots & \ddots & \vdots \\
-    1 & x_n & x_n^2 & \dots & x_n^{n-1} \\
-    \end{vmatrix}
-    = {\prod_{1 \leq {i,j} \leq n} {(x_i - x_j)}}
-  $$
-
-  —<cite>[Three famous mathematical formulas](https://developer.mozilla.org/en-US/docs/Learn/MathML/First_steps/Three_famous_mathematical_formulas) (Mozilla Docs)</cite>
-
-  </blockquote>
-
-## Foregoing some slop
-
-- Goodbye, [ESLint](https://eslint.org/)! There have been so many occasions where I've had to deal with blogging templates with in-built pre-commit hooks which enforce contrived and arbitrary linting rules that, frankly, I couldn't be bothered with. Obviously, linting is awesome for ensuring consistency and best practice, but that's for shared and large codebases. You're dealing with, at most, your MDX blog posts and some interior fetching. It's just not worth the headache.
-- You probably don't need analytics via [Umami](https://umami.is) or [Plausible](https://plausible.io). Let's be realistic: for many personal blogs, unless you're an anime profile picture Twitter microcelebrity, you don't need to know how many of your readers click Big Button A versus how many click Big Button B.
-- You likely don't need a comments section via [Giscus](https://giscus.app). This opens up a can of worms involving the ability to spam comments and the necessity to moderate them. If you want organic discussion about your blog posts to happen, then share on social media and let people discuss there.
-  - Speaking of sharing on social media, let's get rid of the share buttons. When was the last time you actually used a share button on a blog post rather than just copying the URL?
-- You probably don't need a <abbr title="Content Management System">CMS</abbr> unless you have thousands of posts and/or are willing to navigate through a clunky management interface. Markdown and folders is really all you need, which you can organize to your preference via folder or file naming conventions.
-- If you have literally anything involving an `.env` file in a blogging site, maybe think about what you are doing for a moment.
-- Please consider not overriding the browser's <kbd>Ctrl</kbd> + <kbd>K</kbd> functionality to open up a command palette. There should not be a single reason why a user would use a small context menu to browse your blog over the `/blog` route. Most of the time, command palettes on sites do nothing more than regurgitate shortcuts that are already on the same page you're hiding with the palette's modal.
-
-## Something important
-
-Obviously a disclaimer: everything that I've shared here are my own personal gripes and, while I'd like for you to agree with me on a lot of these points for the better of the community, you can go ahead and disagree. The web development community, especially in spaces like Twitter and various online forums, is constantly engaged in heated debates about what constitutes "best practices." You'll find a wide spectrum of viewpoints:
-
-1. Fundamentalists who adhere strictly to established patterns and completely disregard change,
-2. Accelerationists who eat up whatever Vercel cooks as if it's the second coming of Christ,
-3. and everyone in between this spectrum.
-
-I wanted to share what particular technology stack worked the best for me in this particular use case. A stack for one project can be completely unusable for another. If you vehemently hate any of the design choices I've made then simply get rid of them. MIT license! Happy blogging.
+But again this is all just purely my opinion. That's about it for today, thanks for checking out and See ya Later!!! ^_^
