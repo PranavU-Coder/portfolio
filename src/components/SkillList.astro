@@ -2,25 +2,29 @@
 import { Icon } from 'astro-icon/components'
 
 interface Props {
-  title: string;
-  list: { name: string; icon: string }[];
+  title: string
+  list: { name: string; icon: string }[]
 }
 
-const { title, list } = Astro.props;
+const { title, list } = Astro.props
 ---
 
-<div class="rounded-xl border bg-card p-6 shadow-sm h-full">
+<div class="bg-card h-full rounded-xl border p-6 shadow-sm">
   <h2 class="mb-6 text-2xl font-semibold tracking-tight">{title}</h2>
-  <ul class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-    {list.map((skill) => (
-      <li class="flex items-center justify-between group">
-        <span class="text-md font-medium text-muted-foreground group-hover:text-foreground transition-colors truncate mr-2">
-          {skill.name}
-        </span>
-        <div class="flex items-center justify-center shrink-0">
-          <Icon name={skill.icon} class="size-6" />
-        </div>
-      </li>
-    ))}
+  <ul
+    class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2"
+  >
+    {
+      list.map((skill) => (
+        <li class="group flex items-center justify-between">
+          <span class="text-md text-muted-foreground group-hover:text-foreground mr-2 truncate font-medium transition-colors">
+            {skill.name}
+          </span>
+          <div class="flex shrink-0 items-center justify-center">
+            <Icon name={skill.icon} class="size-6" />
+          </div>
+        </li>
+      ))
+    }
   </ul>
 </div>

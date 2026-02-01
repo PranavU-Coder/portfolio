@@ -10,56 +10,60 @@ const { stats } = Astro.props
 
 <section class="rounded-lg border p-6">
   <div class="mb-6">
-    <h2 class="text-2xl font-medium mb-1">GitHub Activity</h2>
-    <p class="text-sm text-muted-foreground">Development activity and code contributions</p>
+    <h2 class="mb-1 text-2xl font-medium">GitHub Activity</h2>
+    <p class="text-muted-foreground text-sm">
+      Development activity and code contributions
+    </p>
   </div>
 
-  <div class="grid grid-cols-2 gap-4 mb-6 md:grid-cols-3">
+  <div class="mb-6 grid grid-cols-2 gap-4 md:grid-cols-3">
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.totalRepositories}</div>
-      <div class="text-sm text-muted-foreground">Repositories</div>
+      <div class="text-muted-foreground text-sm">Repositories</div>
     </div>
-    
+
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.totalCommits}</div>
-      <div class="text-sm text-muted-foreground">Commits</div>
+      <div class="text-muted-foreground text-sm">Commits</div>
     </div>
-    
+
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.totalPullRequests}</div>
-      <div class="text-sm text-muted-foreground">Pull Requests</div>
+      <div class="text-muted-foreground text-sm">Pull Requests</div>
     </div>
-    
+
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.totalIssues}</div>
-      <div class="text-sm text-muted-foreground">Issues</div>
+      <div class="text-muted-foreground text-sm">Issues</div>
     </div>
-    
+
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.totalStars}</div>
-      <div class="text-sm text-muted-foreground">Stars</div>
+      <div class="text-muted-foreground text-sm">Stars</div>
     </div>
-    
+
     <div class="space-y-1">
       <div class="text-3xl font-bold">{stats.mostActiveDay}</div>
-      <div class="text-sm text-muted-foreground">Most Active Day</div>
+      <div class="text-muted-foreground text-sm">Most Active Day</div>
     </div>
   </div>
 
-  {stats.languageStats.length > 0 && (
-    <div class="space-y-3">
-      <div class="flex flex-wrap gap-2 items-center text-sm">
-        {stats.languageStats.map((lang) => (
-          <div class="flex items-center gap-1.5">
-            <div 
-              class="size-3 rounded-full" 
-              style={`background-color: ${lang.color}`}
-            />
-            <span class="font-medium">{lang.name}</span>
-            <span class="text-muted-foreground">{lang.percentage}%</span>
-          </div>
-        ))}
+  {
+    stats.languageStats.length > 0 && (
+      <div class="space-y-3">
+        <div class="flex flex-wrap items-center gap-2 text-sm">
+          {stats.languageStats.map((lang) => (
+            <div class="flex items-center gap-1.5">
+              <div
+                class="size-3 rounded-full"
+                style={`background-color: ${lang.color}`}
+              />
+              <span class="font-medium">{lang.name}</span>
+              <span class="text-muted-foreground">{lang.percentage}%</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 </section>
