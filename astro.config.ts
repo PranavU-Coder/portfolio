@@ -9,6 +9,7 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeExpressiveCode from 'rehype-expressive-code'
 import rehypeExternalLinks from 'rehype-external-links'
 import rehypeKatex from 'rehype-katex'
+import rehypeShiki from '@shikijs/rehype'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
 
@@ -17,34 +18,24 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import type { ExpressiveCodeTheme } from 'rehype-expressive-code'
 
 import tailwindcss from '@tailwindcss/vite'
-import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
-  adapter: cloudflare(),
   integrations: [
-    mdx(),
-    react(),
-    sitemap(),
-    icon({
-      include: {
-        logos: ['*'],
-        lucide: ['*'],
-        devicon: ['*'],
-        'simple-icons': ['*']
-      }
-    })
-  ],
+  mdx(), 
+  react(), 
+  sitemap(), 
+  icon({
+    include: {
+      logos: ['*'],
+      lucide: ['*'],
+      devicon: ['*'],
+      'simple-icons': ['*']
+    }
+  })
+],
   vite: {
     plugins: [tailwindcss()],
-    ssr: {
-      external: ['shiki', '@shikijs/core', '@shikijs/engine-javascript', 'rehype-expressive-code'],
-    },
-    build: {
-      rollupOptions: {
-        external: ['shiki', 'rehype-expressive-code'],
-      },
-    },
   },
   server: {
     port: 1234,
@@ -110,6 +101,16 @@ export default defineConfig({
             },
             uiFontFamily: 'var(--font-sans)',
           },
+        },
+      ],
+      [
+        rehypeShiki,
+        {
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+          inline: 'tailing-curly-colon',
         },
       ],
     ],

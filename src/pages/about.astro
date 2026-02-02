@@ -1,11 +1,4 @@
 ---
-export const prerender = false
-
-Astro.response.headers.set(
-  'Cache-Control',
-  'public, max-age=0, s-maxage=60, stale-while-revalidate=600',
-)
-
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import GitHubContributionCalendar from '@/components/GitHubContributionCalendar.astro'
 import GitHubRepoCard from '@/components/GitHubRepoCard.astro'
