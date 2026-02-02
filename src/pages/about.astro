@@ -11,7 +11,6 @@ import { buttonVariants } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
 import { getAllProjects } from '@/lib/data-utils'
 import { getGitHubRepos } from '@/lib/github-api'
-import { getCachedData } from '@/lib/github-cache'
 import { getContributionCalendar, getGitHubStats } from '@/lib/github-stats-api'
 
 const username = 'PranavU-Coder'
@@ -24,20 +23,15 @@ const excludedRepos = [
   'bitsatards_bot',
   'mellon',
   'portfolio',
+  'microblogs',
+  'cat_breedz',
+  'PranavU-Coder',
 ]
 
-// Use cached data for GitHub API calls otherwise data-fetching each time gets too expensive and can cause switching over/loading over to this page to be a bad ux.
+const githubRepos = await getGitHubRepos(username, excludedRepos)
+const githubStats = await getGitHubStats(username)
+const contributionCalendar = await getContributionCalendar(username)
 
-const githubRepos = await getCachedData(`repos-${username}`, () =>
-  getGitHubRepos(username, excludedRepos),
-)
-
-const githubStats = await getCachedData(`stats-${username}`, () =>
-  getGitHubStats(username),
-)
-const contributionCalendar = await getCachedData(`calendar-${username}`, () =>
-  getContributionCalendar(username),
-)
 const previewRepos = githubRepos.slice(0, 4)
 
 const languages = [
