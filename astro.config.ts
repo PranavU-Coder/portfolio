@@ -22,7 +22,6 @@ import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
-  output: 'hybrid' as any,
   adapter: cloudflare(),
   integrations: [
   mdx(), 

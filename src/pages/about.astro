@@ -1,8 +1,9 @@
 ---
 export const prerender = false
+
 Astro.response.headers.set(
   'Cache-Control',
-  's-maxage=300, stale-while-revalidate=600',
+  'public, max-age=0, s-maxage=60, stale-while-revalidate=600',
 )
 
 import Breadcrumbs from '@/components/Breadcrumbs.astro'

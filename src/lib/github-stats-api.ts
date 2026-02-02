@@ -110,6 +110,7 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
         query,
         variables: { username },
       }),
+      cache: 'no-store',
     })
 
     if (!response.ok) throw new Error(`GitHub GraphQL API error: ${response.status}`)
@@ -213,6 +214,7 @@ export async function getContributionCalendar(username: string): Promise<Contrib
         query,
         variables: { username },
       }),
+      cache: 'no-store',
     })
 
     if (!response.ok) throw new Error(`GitHub GraphQL API error: ${response.status}`)
