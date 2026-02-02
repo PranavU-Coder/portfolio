@@ -18,9 +18,12 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import type { ExpressiveCodeTheme } from 'rehype-expressive-code'
 
 import tailwindcss from '@tailwindcss/vite'
+import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   site: 'https://astro-erudite.vercel.app',
+  output: 'hybrid' as any,
+  adapter: cloudflare(),
   integrations: [
   mdx(), 
   react(), 
