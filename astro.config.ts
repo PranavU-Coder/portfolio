@@ -38,8 +38,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      external: ['node:buffer']
-    }
+      external: ['shiki', '@shikijs/core', '@shikijs/engine-javascript', 'rehype-expressive-code'],
+    },
+    build: {
+      rollupOptions: {
+        external: ['shiki', 'rehype-expressive-code'],
+      },
+    },
   },
   server: {
     port: 1234,
