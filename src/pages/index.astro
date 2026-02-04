@@ -6,7 +6,6 @@ import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts } from '@/lib/data-utils'
-
 const blog = await getRecentPosts(SITE.featuredPostCount)
 ---
 
@@ -21,38 +20,14 @@ const blog = await getRecentPosts(SITE.featuredPostCount)
     </div>
     <div class="p-6 pt-0">
       <p class="text-muted-foreground mb-2 text-sm">
-        This portfolio/blogging-site was made with the help of:
-        <Link
-          href="https://astro.build"
-          class="text-foreground"
-          external
-          underline>Astro</Link
-        >, <Link
-          href="https://tailwindcss.com"
-          class="text-foreground"
-          external
-          underline>Tailwind</Link
-        >, and <Link
-          href="https://ui.shadcn.com"
-          class="text-foreground"
-          external
-          underline>shadcn/ui</Link
-        >. Extraordinarily loosely based on the <Link
-          href="https://astro-micro.vercel.app/"
-          class="text-foreground"
-          external
-          underline>Astro Micro</Link
-        > theme.
+        There is an idea of a Pranav. Some kind of abstraction. But there is no
+        real me. Only an entity. Something illusory. And though I can hide my
+        cold gaze, and you can shake my hand and feel flesh gripping yours, and
+        maybe you can even sense our lifestyles are probably comparable,
       </p>
-      <p class="text-muted-foreground text-sm">
-        This website-rewrite was only possible thanks to this template right
-        here: <Link
-          href="https://github.com/jktrn/astro-erudite"
-          class="text-foreground"
-          underline
-          external>Template</Link
-        > repository.
-      </p>
+      <h3 class="bg-accent/50 rounded-md p-2 text-sm">
+        <span class="text-foreground font-bold">I simply am not there.</span>
+      </h3>
     </div>
   </section>
   <section class="flex flex-col gap-y-4">
