@@ -225,6 +225,17 @@ const tocSections = await getTOCSections(currentPostId)
       <Content />
     </article>
 
+    <div class="col-start-2 mt-12">
+      <script
+        is:inline
+        src="https://utteranc.es/client.js"
+        data-repo="PranavU-Coder/portfolio"
+        data-issue-term="pathname"
+        data-theme="github-dark"
+        crossorigin="anonymous"
+        async></script>
+    </div>
+
     {
       (hasChildPosts || isCurrentSubpost) && (
         <SubpostsSidebar
