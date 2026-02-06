@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.6.3",
   "private": true,
+  "resolutions": {
+    "vite": "latest"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
