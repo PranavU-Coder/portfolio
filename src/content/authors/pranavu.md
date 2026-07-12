@@ -1,9 +1,10 @@
 ---
 name: 'PranavU'
-pronouns: 'he/him'
+pronouns: 'him'
 avatar: './assets/pranav.png'
-bio: '19m, indie-dev, prog-metal and rap enjoyer, love goth culture.'
+bio: "but chuddha, what if? no it won't"
 website: 'https://pranavu.dev'
 github: 'https://github.com/PranavU-Coder'
+twitter: 'https://twitter.com/StrategicPeanut'
 mail: 'pranavu8406@gmail.com'
 ---

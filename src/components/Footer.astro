@@ -1,7 +1,6 @@
 ---
 import { Separator } from '@/components/ui/separator'
 import { SOCIAL_LINKS } from '@/consts'
-import Link from './Link.astro'
 import SocialIcons from './SocialIcons.astro'
 ---
 
@@ -14,12 +13,7 @@ import SocialIcons from './SocialIcons.astro'
     </span>
     <Separator orientation="vertical" className="hidden h-4! sm:block" />
     <p class="text-muted-foreground text-sm">
-      Made with frustration but love by <Link
-        href="https://github.com/PranavU-Coder"
-        class="text-foreground"
-        external
-        underline>PranavU</Link
-      >!
+      made with belgian-blue cows milk
     </p>
   </div>
   <SocialIcons links={SOCIAL_LINKS} />

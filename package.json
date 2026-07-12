@@ -23,6 +23,7 @@
     "@astrojs/sitemap": "^3.4.0",
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
+    "@fontsource-variable/cascadia-code": "^5.2.2",
     "@iconify-json/devicon": "^1.2.57",
     "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.26",

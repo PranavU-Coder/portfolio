@@ -50,7 +50,9 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Dockerfile: '#384d54',
 }
 
-export async function getGitHubStats(username: string): Promise<GitHubStats | null> {
+export async function getGitHubStats(
+  username: string,
+): Promise<GitHubStats | null> {
   const token = import.meta.env.GITHUB_TOKEN
 
   if (!token) {
@@ -112,7 +114,8 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
       }),
     })
 
-    if (!response.ok) throw new Error(`GitHub GraphQL API error: ${response.status}`)
+    if (!response.ok)
+      throw new Error(`GitHub GraphQL API error: ${response.status}`)
     const data = await response.json()
 
     if (data.errors) {
@@ -123,7 +126,7 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
     const user = data.data.user
     const totalStars = user.repositories.nodes.reduce(
       (acc: number, repo: any) => acc + repo.stargazerCount,
-      0
+      0,
     )
 
     const languageMap = new Map<string, number>()
@@ -144,28 +147,42 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
         color: LANGUAGE_COLORS[name] || '#8b949e',
       }))
       .sort((a, b) => b.percentage - a.percentage)
-      .slice(0, 5) 
+      .slice(0, 5)
 
     const dayContributions = new Map<number, number>()
-    user.contributionsCollection.contributionCalendar.weeks.forEach((week: any) => {
-      week.contributionDays.forEach((day: any) => {
-        const weekday = day.weekday
-        const current = dayContributions.get(weekday) || 0
-        dayContributions.set(weekday, current + day.contributionCount)
-      })
-    })
+    user.contributionsCollection.contributionCalendar.weeks.forEach(
+      (week: any) => {
+        week.contributionDays.forEach((day: any) => {
+          const weekday = day.weekday
+          const current = dayContributions.get(weekday) || 0
+          dayContributions.set(weekday, current + day.contributionCount)
+        })
+      },
+    )
 
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const mostActiveWeekday = Array.from(dayContributions.entries()).sort((a, b) => b[1] - a[1])[0]
+    const dayNames = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
+    const mostActiveWeekday = Array.from(dayContributions.entries()).sort(
+      (a, b) => b[1] - a[1],
+    )[0]
     const mostActiveDay = dayNames[mostActiveWeekday[0]]
 
     return {
       totalRepositories: user.repositories.totalCount,
       totalCommits: user.contributionsCollection.totalCommitContributions,
-      totalPullRequests: user.contributionsCollection.totalPullRequestContributions,
+      totalPullRequests:
+        user.contributionsCollection.totalPullRequestContributions,
       totalIssues: user.contributionsCollection.totalIssueContributions,
       totalStars,
-      contributionsLastYear: user.contributionsCollection.contributionCalendar.totalContributions,
+      contributionsLastYear:
+        user.contributionsCollection.contributionCalendar.totalContributions,
       mostActiveDay,
       languageStats,
     }
@@ -175,7 +192,9 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
   }
 }
 
-export async function getContributionCalendar(username: string): Promise<ContributionCalendar | null> {
+export async function getContributionCalendar(
+  username: string,
+): Promise<ContributionCalendar | null> {
   const token = import.meta.env.GITHUB_TOKEN
 
   if (!token) {
@@ -215,7 +234,8 @@ export async function getContributionCalendar(username: string): Promise<Contrib
       }),
     })
 
-    if (!response.ok) throw new Error(`GitHub GraphQL API error: ${response.status}`)
+    if (!response.ok)
+      throw new Error(`GitHub GraphQL API error: ${response.status}`)
     const data = await response.json()
 
     if (data.errors) {

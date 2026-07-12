@@ -2,7 +2,7 @@ import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
   title: 'PranavU-Coder',
-  description: '19m, indie-dev, prog-metal and rap enjoyer, love goth culture.',
+  description: "but chuddha, what if? no it won't",
   href: 'https://pranavu.dev/',
   author: 'PranavU',
   locale: 'en-US',
@@ -29,6 +29,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     href: 'mailto:pranavu8406@gmail.com',
     label: 'Email',
+  },
+  {
+    href: 'https://twitter.com/StrategicPeanut',
+    label: 'Twitter',
   },
   {
     href: '/rss.xml',

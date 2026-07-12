@@ -20,22 +20,22 @@ import type { ExpressiveCodeTheme } from 'rehype-expressive-code'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://astro-erudite.vercel.app',
+  site: 'https://pranavu.dev',
   integrations: [
-  mdx(), 
-  react(), 
-  sitemap(), 
-  icon({
-    include: {
-      logos: ['*'],
-      lucide: ['*'],
-      devicon: ['*'],
-      'simple-icons': ['*']
-    }
-  })
-],
+    mdx(),
+    react(),
+    sitemap(),
+    icon({
+      include: {
+        logos: ['*'],
+        lucide: ['*'],
+        devicon: ['*'],
+        'simple-icons': ['*'],
+      },
+    }),
+  ],
   vite: {
-    plugins: [tailwindcss() as any],
+    plugins: [tailwindcss() as any], // A banger from sir Pranav Unni as always
   },
   server: {
     port: 1234,
