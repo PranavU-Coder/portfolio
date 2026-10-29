@@ -27,6 +27,7 @@ import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { render } from 'astro:content'
+import 'katex/dist/katex.min.css'
 
 export async function getStaticPaths() {
   const posts = await getAllPostsAndSubposts()
@@ -113,6 +114,9 @@ const tocSections = await getTOCSections(currentPostId)
         <Image
           src={post.data.image}
           alt={post.data.title}
+          widths={[640, 1024, 1456]}
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          priority
           class="col-span-full mx-auto w-full max-w-5xl object-cover"
         />
       )
@@ -140,6 +144,7 @@ const tocSections = await getTOCSections(currentPostId)
                       alt={author.name}
                       width={20}
                       height={20}
+                      layout="fixed"
                       class="rounded-full"
                     />
                     {author.isRegistered ? (
@@ -225,16 +230,7 @@ const tocSections = await getTOCSections(currentPostId)
       <Content />
     </article>
 
-    <div class="col-start-2 mt-12">
-      <script
-        is:inline
-        src="https://utteranc.es/client.js"
-        data-repo="PranavU-Coder/portfolio"
-        data-issue-term="pathname"
-        data-theme="github-dark"
-        crossorigin="anonymous"
-        async></script>
-    </div>
+    <div class="col-start-2 mt-12" id="comments"></div>
 
     {
       (hasChildPosts || isCurrentSubpost) && (
@@ -269,6 +265,22 @@ const tocSections = await getTOCSections(currentPostId)
   </Button>
 
   <script>
+    // Inject utterances on every page load
+    document.addEventListener('astro:page-load', () => {
+      const comments = document.getElementById('comments')
+      if (!comments || comments.querySelector('.utterances')) return
+
+      comments.replaceChildren()
+      const script = document.createElement('script')
+      script.src = 'https://utteranc.es/client.js'
+      script.async = true
+      script.crossOrigin = 'anonymous'
+      script.setAttribute('repo', 'PranavU-Coder/portfolio')
+      script.setAttribute('issue-term', 'pathname')
+      script.setAttribute('theme', 'github-dark')
+      comments.appendChild(script)
+    })
+
     document.addEventListener('astro:page-load', () => {
       const scrollToTopButton = document.getElementById('scroll-to-top')
       const footer = document.querySelector('footer')

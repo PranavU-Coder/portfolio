@@ -41,6 +41,14 @@ export default defineConfig({
     port: 1234,
     host: true,
   },
+  image: {
+    // Emit srcset/sizes for every <Image> and Markdown image
+    layout: 'constrained',
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
   devToolbar: {
     enabled: false,
   },

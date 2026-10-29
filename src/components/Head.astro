@@ -1,5 +1,6 @@
 ---
 import { SITE } from '@/consts'
+import cascadiaLatin from '@fontsource-variable/cascadia-code/files/cascadia-code-latin-wght-normal.woff2?url'
 import { ClientRouter } from 'astro:transitions'
 import Favicons from './Favicons.astro'
 ---
@@ -45,9 +46,11 @@ import Favicons from './Favicons.astro'
   <Favicons />
 
   <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
-    crossorigin="anonymous"
+    rel="preload"
+    href={cascadiaLatin}
+    as="font"
+    type="font/woff2"
+    crossorigin
   />
   <ClientRouter />
 
